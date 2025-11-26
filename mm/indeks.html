@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="description" content="Pesan snack tradisional favorit Anda hanya Rp. 2.000 dengan pengantaran langsung ke rumah di area Gentan Sukoharjo">
+    <title>MM Snack - Pesan Snack Tradisional</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="manifest" href="#" id="manifest-placeholder">
+    
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+        }
+        
+        [data-theme="dark"] {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --dark: #f8f9fa;
+            --light: #1a1a1a;
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --text: #e0e0e0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light, #f8f9fa);
+            color: var(--dark, #2c3e50);
+            transition: all 0.3s ease;
+        }
+        
+        [data-theme="dark"] body {
+            background: var(--bg);
+            color: var(--text);
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff8787 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 40px 0 30px;
+            margin-bottom: 30px;
+            border-radius: 0 0 30px 30px;
+        }
+        
+        .promo-banner {
+            background: linear-gradient(135deg, #ffd93d 0%, #ff9a3d 100%);
+            color: #2c3e50;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .product-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            background: white;
+        }
+        
+        [data-theme="dark"] .product-card {
+            background: var(--card-bg);
+            color: var(--text);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .badge-new {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .badge-bestseller {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 25px;
+            padding: 8px 20px;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        
+        [data-theme="dark"] .filter-btn {
+            background: var(--card-bg);
+            color: var(--text);
+        }
+        
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .order-history-item {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        [data-theme="dark"] .order-history-item {
+            background: var(--card-bg);
+        }
+        
+        .toast {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+        }
+        
+        .modal-content {
+            border-radius: 20px;
+        }
+        
+        [data-theme="dark"] .modal-content {
+            background: var(--card-bg);
+            color: var(--text);
+        }
+        
+        [data-theme="dark"] .form-control,
+        [data-theme="dark"] .form-select {
+            background: var(--bg);
+            color: var(--text);
+            border-color: #444;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="fas fa-cookie-bite"></i> MM Snack</a>
+            <div class="d-flex align-items-center">
+                <span class="theme-toggle me-3" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </span>
+                <button class="btn btn-light position-relative me-2" onclick="showCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </button>
+                <button class="btn btn-light" onclick="showOrders()">
+                    <i class="fas fa-history"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container text-center">
+            <h1 class="fw-bold mb-3">🍱 Snack Tradisional Enak!</h1>
+            <p class="lead">Semua snack hanya Rp. 2.000 dengan pengantaran gratis ke rumah Anda</p>
+            <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Melayani area Gentan Sukoharjo</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Promo Banner -->
+        <div class="promo-banner text-center">
+            <h4 class="mb-1"><i class="fas fa-gift"></i> Promo Hari Ini!</h4>
+            <p class="mb-0 fw-bold">Beli 10 Gratis 1 - Berlaku untuk semua produk</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-container mb-4">
+            <iframe src="https://www.youtube.com/embed/vVTIdOS52os" title="Cara Membuat Risol Mayo Crispy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <!-- Filter -->
+        <div class="text-center mb-4">
+            <button class="filter-btn active" onclick="filterProducts('semua')">Semua</button>
+            <button class="filter-btn" onclick="filterProducts('terlaris')">Terlaris</button>
+            <button class="filter-btn" onclick="filterProducts('terbaru')">Terbaru</button>
+        </div>
+
+        <!-- Products -->
+        <div class="row" id="products-container"></div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-shopping-cart"></i> Keranjang Belanja</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="cart-items"></div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <div class="d-flex justify-content-between mb-3">
+                            <strong>Total:</strong>
+                            <strong class="text-primary" id="cart-total">Rp. 0</strong>
+                        </div>
+                        <button class="btn btn-primary w-100" onclick="checkout()">
+                            <i class="fas fa-credit-card"></i> Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-map-marker-alt"></i> Detail Pengiriman</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="checkout-form">
+                        <div class="mb-3">
+                            <label class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="customer-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nomor WhatsApp</label>
+                            <input type="tel" class="form-control" id="customer-phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Alamat Lengkap</label>
+                            <textarea class="form-control" id="customer-address" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Catatan (Opsional)</label>
+                            <textarea class="form-control" id="customer-notes" rows="2"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button class="btn btn-primary" onclick="completeOrder()">
+                        <i class="fas fa-check"></i> Selesaikan Pesanan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Orders Modal -->
+    <div class="modal fade" id="ordersModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-history"></i> Riwayat Pesanan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="orders-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/6281234567890?text=Halo%20MM%20Snack%2C%20saya%20butuh%20bantuan" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Toast Notification -->
+    <div class="toast align-items-center text-white bg-success border-0" role="alert" id="notification-toast">
+        <div class="d-flex">
+            <div class="toast-body" id="toast-message"></div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Products Data - GAMBAR SUDAH SIAP PAKAI!
+        const products = [
+            { 
+                id: 1, 
+                name: 'Risol Mayo', 
+                price: 2000, 
+                image: 'data:image/svg+xml,%3Csvg xmlns="<img src="risolmayo.jpg" alt="Risol Mayo">" width="400" height="400"%3E%3Crect fill="%23FF6B6B" width="400" height="400"/%3E%3Ctext x="50%25" y="45%25" font-size="24" fill="white" text-anchor="middle" font-family="Arial"%3ERisol Mayo%3C/text%3E%3Ctext x="50%25" y="55%25" font-size="48" text-anchor="middle"%3E🥟%3C/text%3E%3C/svg%3E',
+                category: 'terlaris', 
+                badge: 'bestseller' 
+            },
+            { 
+                id: 2, 
+                name: 'Martabak Mini', 
+                price: 2000, 
+                image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%234ECDC4" width="400" height="400"/%3E%3Ctext x="50%25" y="45%25" font-size="24" fill="white" text-anchor="middle" font-family="Arial"%3EMartabak Mini%3C/text%3E%3Ctext x="50%25" y="55%25" font-size="48" text-anchor="middle"%3E🥞%3C/text%3E%3C/svg%3E',
+                category: 'terlaris', 
+                badge: 'bestseller' 
+            },
+            { 
+                id: 3, 
+                name: 'Lumpia Basah', 
+                price: 2000, 
+                image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23FFD93D" width="400" height="400"/%3E%3Ctext x="50%25" y="45%25" font-size="24" fill="white" text-anchor="middle" font-family="Arial"%3ELumpia Basah%3C/text%3E%3Ctext x="50%25" y="55%25" font-size="48" text-anchor="middle"%3E🌯%3C/text%3E%3C/svg%3E',
+                category: 'terlaris', 
+                badge: 'bestseller' 
+            },
+            { 
+                id: 4, 
+                name: 'Pastel Sayur', 
+                price: 2000, 
+                image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%2395E1D3" width="400" height="400"/%3E%3Ctext x="50%25" y="45%25" font-size="24" fill="white" text-anchor="middle" font-family="Arial"%3EPastel Sayur%3C/text%3E%3Ctext x="50%25" y="55%25" font-size="48" text-anchor="middle"%3E🥟%3C/text%3E%3C/svg%3E',
+                category: 'terbaru', 
+                badge: 'new' 
+            },
+            { 
+                id: 5, 
+                name: 'Lemper Ayam', 
+                price: 2000, 
+                image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23F38181" width="400" height="400"/%3E%3Ctext x="50%25" y="45%25" font-size="24" fill="white" text-anchor="middle" font-family="Arial"%3ELemper Ayam%3C/text%3E%3Ctext x="50%25" y="55%25" font-size="48" text-anchor="middle"%3E🍙%3C/text%3E%3C/svg%3E',
+                category: 'terbaru', 
+                badge: 'new' 
+            },
+            { 
+                id: 6, 
+                name: 'Kroket Kentang', 
+                price: 2000, 
+                image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23AA96DA" width="400" height="400"/%3E%3Ctext x="50%25" y="45%25" font-size="24" fill="white" text-anchor="middle" font-family="Arial"%3EKroket Kentang%3C/text%3E%3Ctext x="50%25" y="55%25" font-size="48" text-anchor="middle"%3E🥔%3C/text%3E%3C/svg%3E',
+                category: 'semua', 
+                badge: null 
+            },
+            { 
+                id: 7, 
+                name: 'Tahu Isi', 
+                price: 2000, 
+                image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23FCBAD3" width="400" height="400"/%3E%3Ctext x="50%25" y="45%25" font-size="24" fill="white" text-anchor="middle" font-family="Arial"%3ETahu Isi%3C/text%3E%3Ctext x="50%25" y="55%25" font-size="48" text-anchor="middle"%3E🍢%3C/text%3E%3C/svg%3E',
+                category: 'semua', 
+                badge: null 
+            },
+            { 
+                id: 8, 
+                name: 'Batagor', 
+                price: 2000, 
+                image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23A8D8EA" width="400" height="400"/%3E%3Ctext x="50%25" y="45%25" font-size="24" fill="white" text-anchor="middle" font-family="Arial"%3EBatagor%3C/text%3E%3Ctext x="50%25" y="55%25" font-size="48" text-anchor="middle"%3E🍜%3C/text%3E%3C/svg%3E',
+                category: 'semua', 
+                badge: null 
+            }
+        ];
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        let currentFilter = 'semua';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTheme();
+            displayProducts();
+            updateCartCount();
+            registerServiceWorker();
+            createManifest();
+        });
+
+        function displayProducts() {
+            const container = document.getElementById('products-container');
+            const filteredProducts = currentFilter === 'semua' 
+                ? products 
+                : products.filter(p => p.category === currentFilter);
+            
+            container.innerHTML = filteredProducts.map(product => `
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card">
+                        <div class="position-relative">
+                            <img src="${product.image}" class="product-img" alt="${product.name}" onerror="this.src='https://via.placeholder.com/400x400/FF6B6B/FFFFFF?text=${product.name}'">
+                            ${product.badge === 'bestseller' ? '<span class="badge-bestseller"><i class="fas fa-fire"></i> Terlaris</span>' : ''}
+                            ${product.badge === 'new' ? '<span class="badge-new"><i class="fas fa-star"></i> Baru</span>' : ''}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="text-primary fw-bold mb-3">Rp. ${product.price.toLocaleString('id-ID')}</p>
+                            <button class="btn btn-primary w-100" onclick="addToCart(${product.id})">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            displayProducts();
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification(`${product.name} ditambahkan ke keranjang!`);
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        function showCart() {
+            const modal = new bootstrap.Modal(document.getElementById('cartModal'));
+            const container = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-center text-muted">Keranjang kosong</p>';
+                document.getElementById('cart-total').textContent = 'Rp. 0';
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="d-flex justify-content-between align-items-center mb-3 p-3 border rounded">
+                        <div>
+                            <h6 class="mb-1">${item.name}</h6>
+                            <small class="text-muted">Rp. ${item.price.toLocaleString('id-ID')} x ${item.quantity}</small>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-sm btn-outline-secondary me-2" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span class="fw-bold mx-2">${item.quantity}</span>
+                            <button class="btn btn-sm btn-outline-secondary me-3" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <button class="btn btn-sm btn-danger" onclick="removeFromCart(${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const bonus = Math.floor(cart.reduce((sum, item) => sum + item.quantity, 0) / 10);
+                const bonusText = bonus > 0 ? ` (Bonus ${bonus} gratis!)` : '';
+                document.getElementById('cart-total').textContent = `Rp. ${total.toLocaleString('id-ID')}${bonusText}`;
+            }
+            
+            modal.show();
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    showCart();
+                    updateCartCount();
+                }
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showCart();
+            updateCartCount();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Keranjang masih kosong!', 'warning');
+                return;
+            }
+            
+            bootstrap.Modal.getInstance(document.getElementById('cartModal')).hide();
+            const modal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+            modal.show();
+        }
+
+        function completeOrder() {
+            const name = document.getElementById('customer-name').value;
+            const phone = document.getElementById('customer-phone').value;
+            const address = document.getElementById('customer-address').value;
+            const notes = document.getElementById('customer-notes').value;
+            
+            if (!name || !phone || !address) {
+                showNotification('Mohon lengkapi semua data!', 'warning');
+                return;
+            }
+            
+            const order = {
+                id: Date.now(),
+                date: new Date().toLocaleString('id-ID'),
+                items: [...cart],
+                customer: { name, phone, address, notes },
+                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                status: 'Diproses'
+            };
+            
+            orders.unshift(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            bootstrap.Modal.getInstance(document.getElementById('checkoutModal')).hide();
+            document.getElementById('checkout-form').reset();
+            
+            showNotification('Pesanan berhasil! Kami akan segera menghubungi Anda.', 'success');
+        }
+
+        function showOrders() {
+            const modal = new bootstrap.Modal(document.getElementById('ordersModal'));
+            const container = document.getElementById('orders-container');
+            
+            if (orders.length === 0) {
+                container.innerHTML = '<p class="text-center text-muted">Belum ada pesanan</p>';
+            } else {
+                container.innerHTML = orders.map(order => `
+                    <div class="order-history-item">
+                        <div class="d-flex justify-content-between mb-2">
+                            <strong>Order #${order.id}</strong>
+                            <span class="badge bg-warning">${order.status}</span>
+                        </div>
+                        <small class="text-muted d-block mb-2"><i class="fas fa-clock"></i> ${order.date}</small>
+                        <div class="mb-2">
+                            ${order.items.map(item => `<div>• ${item.name} x${item.quantity}</div>`).join('')}
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <strong>Total:</strong>
+                            <strong class="text-primary">Rp. ${order.total.toLocaleString('id-ID')}</strong>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            modal.show();
+        }
+
+        function showNotification(message, type = 'success') {
+            const toast = document.getElementById('notification-toast');
+            const toastBody = document.getElementById('toast-message');
+            
+            toast.className = `toast align-items-center text-white border-0 bg-${type}`;
+            toastBody.textContent = message;
+            
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                html.removeAttribute('data-theme');
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function loadTheme() {
+            const theme = localStorage.getItem('theme');
+            const icon = document.getElementById('theme-icon');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                const swCode = `
+                    const CACHE_NAME = 'mm-snack-v1';
+                    const urlsToCache = ['/'];
+                    
+                    self.addEventListener('install', event => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then(cache => cache.addAll(urlsToCache))
+                        );
+                    });
+                    
+                    self.addEventListener('fetch', event => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then(response => response || fetch(event.request))
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl);
+            }
+        }
+
+        function createManifest() {
+            const manifest = {
+                name: 'MM Snack',
+                short_name: 'MM Snack',
+                description: 'Pesan snack tradisional favorit Anda',
+                start_url: '/',
+                display: 'standalone',
+                background_color: '#ffffff',
+                theme_color: '#ff6b6b',
+                icons: [
+                    {
+                        src: 'https://via.placeholder.com/192?text=MM',
+                        sizes: '192x192',
+                        type: 'image/png'
+                    },
+                    {
+                        src: 'https://via.placeholder.com/512?text=MM',
+                        sizes: '512x512',
+                        type: 'image/png'
+                    }
+                ]
+            };
+            
+            const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+            const manifestURL = URL.createObjectURL(blob);
+            document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
+        }
+    </script>
+</body>
+</html>
